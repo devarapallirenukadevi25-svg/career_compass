@@ -54,7 +54,8 @@ class LocalCursor:
         self.documents = documents
 
     def sort(self, key, direction):
-        self.documents.sort(key=lambda item: item.get(key), reverse=direction == -1)
+        self.documents.sort(key=lambda item: item.get(key),
+                            reverse=direction == -1)
         return self
 
     def limit(self, count):
@@ -139,7 +140,8 @@ class LocalCollection:
         documents = list(self.find(query, projection))
         if sort:
             key, direction = sort[0]
-            documents.sort(key=lambda item: item.get(key), reverse=direction == -1)
+            documents.sort(key=lambda item: item.get(
+                key), reverse=direction == -1)
         return documents[0] if documents else None
 
     def insert_one(self, document):
@@ -207,7 +209,8 @@ class LocalCollection:
 def _create_local_db(reason):
     global database_backend
     database_backend = "local"
-    print(f"[db] WARNING: Using local JSON database at {os.path.abspath(LOCAL_DB_PATH)}. Reason: {reason}")
+    print(
+        f"[db] WARNING: Using local JSON database at {os.path.abspath(LOCAL_DB_PATH)}. Reason: {reason}")
     return LocalDatabase(LOCAL_DB_PATH)
 
 
@@ -221,13 +224,15 @@ def ensure_mongo_indexes(db):
         db.resume_analyses.create_index([("user_id", 1), ("created_at", -1)])
         print("[db] MongoDB indexes verified.")
     except PyMongoError as exc:
-        print(f"[db] WARNING: Could not verify MongoDB indexes. error={type(exc).__name__}: {exc}")
+        print(
+            f"[db] WARNING: Could not verify MongoDB indexes. error={type(exc).__name__}: {exc}")
 
 
 def get_client():
     global client, database, database_backend
     if client is None:
-        print(f"[db] DB_BACKEND={DB_BACKEND}; MONGO_URI host={_safe_mongo_host()}; DB_NAME={DB_NAME}")
+        print(
+            f"[db] DB_BACKEND={DB_BACKEND}; MONGO_URI host={_safe_mongo_host()}; DB_NAME={DB_NAME}")
 
         if DB_BACKEND == 'local':
             database = _create_local_db("DB_BACKEND=local")
@@ -236,20 +241,24 @@ def get_client():
 
         if not MONGO_URI:
             if DB_BACKEND in ('mongo', 'mongodb', 'atlas'):
-                raise ConfigurationError("MONGO_URI is required when DB_BACKEND=mongodb")
+                raise ConfigurationError(
+                    "MONGO_URI is required when DB_BACKEND=mongodb")
             database = _create_local_db("MONGO_URI is not configured")
             client = database.client
             return client
 
         try:
-            client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=3000, connectTimeoutMS=3000)
+            client = MongoClient(
+                MONGO_URI, serverSelectionTimeoutMS=10000, connectTimeoutMS=10000, tls=True)
             client.admin.command('ping')
             database = client[DB_NAME]
             database_backend = "mongodb"
             ensure_mongo_indexes(database)
-            print(f"[db] Connected to MongoDB successfully. host={_safe_mongo_host()} db={DB_NAME}")
+            print(
+                f"[db] Connected to MongoDB successfully. host={_safe_mongo_host()} db={DB_NAME}")
         except (PyMongoError, ServerSelectionTimeoutError, ConfigurationError, ConnectionFailure) as exc:
-            print(f"[db] MongoDB connection failed. host={_safe_mongo_host()} error={type(exc).__name__}: {exc}")
+            print(
+                f"[db] MongoDB connection failed. host={_safe_mongo_host()} error={type(exc).__name__}: {exc}")
             if DB_BACKEND in ('mongo', 'mongodb', 'atlas'):
                 client = None
                 database = None

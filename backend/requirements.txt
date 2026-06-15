@@ -2,7 +2,8 @@ Flask
 Flask-Cors
 Flask-JWT-Extended
 Werkzeug
-pymongo
+pymongo[srv]==4.7.3
+dnspython==2.6.1
 scikit-learn
 pandas
 numpy
@@ -11,3 +12,4 @@ groq
 python-dotenv
 gunicorn
 PyPDF2
+dnspython
