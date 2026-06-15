@@ -1,0 +1,8 @@
+backend/
+trained_models/
+data/
+dataset/
+scripts/
+*.py
+render.yaml
+.env

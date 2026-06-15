@@ -1,0 +1,13 @@
+Flask
+Flask-Cors
+Flask-JWT-Extended
+Werkzeug
+pymongo
+scikit-learn
+pandas
+numpy
+joblib
+groq
+python-dotenv
+gunicorn
+PyPDF2

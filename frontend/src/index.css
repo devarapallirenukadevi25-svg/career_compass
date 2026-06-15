@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-textMain font-sans antialiased;
+    background-image: 
+      radial-gradient(circle at 15% 50%, rgba(14, 165, 233, 0.08), transparent 25%),
+      radial-gradient(circle at 85% 30%, rgba(14, 165, 233, 0.05), transparent 25%);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-surface/80 backdrop-blur-md border border-surfaceHighlight rounded-2xl shadow-xl;
+  }
+  
+  .glass-panel {
+    @apply bg-surface/50 backdrop-blur-sm border border-surfaceHighlight/50 rounded-xl;
+  }
+  
+  .input-field {
+    @apply w-full bg-background border border-surfaceHighlight rounded-lg px-4 py-3 text-textMain focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-medium py-3 px-6 rounded-lg shadow-lg shadow-primary-500/30 transform transition-all hover:-translate-y-1 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none;
+  }
+
+  .btn-secondary {
+    @apply bg-surfaceHighlight hover:bg-surfaceHighlight/80 text-white font-medium py-3 px-6 rounded-lg transition-all;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155; 
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569; 
+}

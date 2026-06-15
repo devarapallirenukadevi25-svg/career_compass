@@ -1,0 +1,48 @@
+# Python/Flask
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment Variables
+.env
+
+# MacOS
+.DS_Store
+
+# Frontend is inside frontend/ so its own gitignore handles node_modules, but just in case:
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# Logs
+*.log
+
+# PyMongo / MongoDB / DB
+*.sqlite3
+
+# Models (Keep trained_models/ if they are meant to be deployed, otherwise ignore them.
+# Given they are needed for Render, we MUST NOT ignore trained_models/*.pkl)
+# We won't ignore trained_models/
