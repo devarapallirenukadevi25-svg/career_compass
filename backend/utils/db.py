@@ -249,7 +249,7 @@ def get_client():
 
         try:
             client = MongoClient(
-                MONGO_URI, serverSelectionTimeoutMS=10000, connectTimeoutMS=10000, tls=True)
+                MONGO_URI, serverSelectionTimeoutMS=10000, connectTimeoutMS=10000)
             client.admin.command('ping')
             database = client[DB_NAME]
             database_backend = "mongodb"
